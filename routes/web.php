@@ -14,21 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  /*
+   * if not authenticated redirect to login
+   * if authenticated redirect to dashboard or admin dashboard based on
+   * is_admin true or false
+   */
+  return redirect('/spp/login');
 });
 
 Route::prefix('spp')->group(function() {
 
   Route::get("/login", function() {
     return view('login');
-  })->name('mahasiswa.login');
+  })->name('login');
 
-  // buat controller CRUD
+  // buat controller CRUD with jquery
   Route::get("/dashboard", function() {
     return view('dashboard');
   })->name('mahasiswa.dashboard');
 
-  Route::get('/faq')->group(function() {
+  Route::get('/faq', function() {
     return view('faq');
   })->name('spp.faq');
 
