@@ -47,5 +47,4 @@ Route::prefix('spp')->group(function() {
       return view('admin.cetak');
     })->name('cetak.spp');
   });
-
 });
