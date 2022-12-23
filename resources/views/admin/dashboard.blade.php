@@ -1,1 +1,5 @@
-<h1>admin dashboard</h1>
+@extends('layouts.index')
+
+@section('content')
+  <h1>admin dashboards</h1>
+@stop
