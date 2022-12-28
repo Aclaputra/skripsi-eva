@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,24 +32,27 @@ Route::prefix('spp')->group(function() {
         return view('login');
     })->name('login');
 
-    Route::get('registration', [CustomAuthController::class], 'registration')
-        ->name('registration');
+    Route::get('/registration', function (){
+        return view('registration');
+    })->name('registration');
 
     // create controller CRUD with jquery
-    Route::get("/dashboard", function() {
-        return view('dashboard');
-    })->name('mahasiswa.dashboard');
+    Route::get("/dashboard", [MahasiswaController::class, 'index'])
+        ->name('mahasiswa.dashboard')
+        ->middleware('auth','isUser');
 
     Route::get('/faq', function() {
         return view('faq');
     })->name('spp.faq');
 
+    Route::get('signout', [CustomAuthController::class, 'signOut'])
+        ->name('signout');
     /**
      * POST
      */
-    Route::post('custom-login', [CustomAuthController::class], 'customLogin')
+    Route::post('custom-login', [CustomAuthController::class, 'customLogin'])
         ->name("login.custom");
-    Route::post('custom-registration', [CustomAuthController::class], 'customRegistration')
+    Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'], )
         ->name("register.custom");
 
 
@@ -58,9 +62,7 @@ Route::prefix('spp')->group(function() {
     Route::prefix('admin')->group(function() {
         Route::get('/dashboard', function() {
           return view('admin.dashboard');
-        })->name('admin.dashboard');
-
-
+        })->name('admin.dashboard')->middleware('auth','isAdmin');
 
         Route::get('/cetak-spp', function() {
           return view('admin.cetak');
