@@ -1,0 +1,18 @@
+@startuml
+entity Users {
+* id : int
+--
+* name : VARCHAR
+* email : VARCHAR
+* password : VARCHAR
+  is_admin : BOOLEAN (Default 0)
+}
+
+entity Spp {
+* id : int
+--
+  tgl : DATE
+  bayaran : VARCHAR
+  is_paid : BOOLEAN (Default 0)
+}
+@enduml
