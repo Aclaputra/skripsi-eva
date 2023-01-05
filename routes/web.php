@@ -37,9 +37,13 @@ Route::prefix('spp')->group(function() {
     })->name('registration');
 
     // create controller CRUD with jquery
-    Route::get("/dashboard", [MahasiswaController::class, 'index'])
+    Route::get("/dashboard", [MahasiswaController::class, 'getMahasiswa'])
         ->name('mahasiswa.dashboard')
         ->middleware('auth','isUser');
+ //   Route::get("/dashboard/list", [MahasiswaController::class, 'getMahasiswa'])
+ //       ->name('mahasiswa.list');
+
+
 
     Route::get('/faq', function() {
         return view('faq');
@@ -54,7 +58,6 @@ Route::prefix('spp')->group(function() {
         ->name("login.custom");
     Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'], )
         ->name("register.custom");
-
 
     /**
      * Admin prefix /admin/
